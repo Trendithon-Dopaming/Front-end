@@ -1,20 +1,13 @@
-import "./App.css";
-import React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Mainpage from "./pages";
 
-//페이지
-import Mainpage from "./pages/mainpage";
-
-function App() {
-    return (
-        <div className="App">
-            <Router>
-                <Routes>
-                    <Route path="/mainpage" element={<Mainpage />}></Route>
-                </Routes>
-            </Router>
-        </div>
-    );
-}
-
+const App = () => {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Mainpage />}></Route>
+      </Routes>
+    </BrowserRouter>
+  );
+};
 export default App;
