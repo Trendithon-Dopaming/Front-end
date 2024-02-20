@@ -13,6 +13,7 @@ const InputBox = styled.div`
   }
   .emailTitle {
     width: 100px;
+    margin-top: 72px;
   }
   .pwTitle {
     width: 100px;
@@ -31,28 +32,37 @@ const InputBox = styled.div`
     }
   }
   .email {
-    margin: 72px 100px 60px 0;
+    margin: 72px 100px 0 0;
   }
   .pw {
     margin-right: 100px;
   }
-  .error {
+  .emailGuide {
+    color: ${({ emailError }) => (emailError ? "#fff" : "#000")};
     font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-bottom: 40px;
+    text-align: center;
+    margin-right: 480px;
   }
   .pwGuide {
-    color: #fff;
+    color: ${({ pwError }) => (pwError ? "red" : "fff")};
     font-size: 12px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
     margin-bottom: 310px;
     text-align: center;
-    margin-right: 400px;
+    margin-right: 460px;
   }
 `;
 
 const LoginInput = ({ email, pw, setEmail, setPw }) => {
-  const [emailError, setEmailError] = useState("");
+  const [emailError, setEmailError] = useState(false);
+  const [pwError, setPwError] = useState(false);
+
   const onChangeEmail = (e) => {
     const newEmail = e.target.value;
     setEmail(newEmail);
@@ -60,38 +70,53 @@ const LoginInput = ({ email, pw, setEmail, setPw }) => {
     const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
 
     if (newEmail === "") {
-      setEmailError("");
+      setEmailError(false);
     } else if (!emailRegex.test(newEmail)) {
-      setEmailError("⚠️ 올바른 이메일 형식이 아닙니다.");
+      setEmailError(true);
     } else {
-      setEmailError("");
+      setEmailError(false);
+    }
+  };
+
+  const onChangePassword = (e) => {
+    const newPassword = e.target.value;
+    setPw(newPassword);
+
+    if (newPassword.length < 4) {
+      setPwError(true);
+    } else {
+      setPwError(false);
     }
   };
 
   return (
-    <InputBox>
+    <InputBox emailError={emailError} pwError={pwError}>
       <div className="inputContainer">
         <span className="emailTitle">이메일</span>
         <input
           type="text"
-          className={`email ${emailError ? "error" : ""}`}
+          className="email"
           onChange={onChangeEmail}
           value={email}
         />
-        {emailError && <p className="error">{emailError}</p>}
       </div>
+      <p className="emailGuide">
+        {emailError ? "*유효한 형식이 아닙니다." : "*유효한 형식이 아닙니다."}
+      </p>
       <div className="inputContainer">
         <span className="pwTitle">비밀번호</span>
         <input
           type="password"
           className="pw"
-          onChange={(e) => {
-            setPw(e.target.value);
-          }}
+          onChange={onChangePassword}
           value={pw}
         />
       </div>
-      <p className="pwGuide">*최소 4자 이상 비밀번호를 입력해주세요.</p>
+      <p className="pwGuide">
+        {pwError
+          ? "*최소 4자 이상 입력해주세요."
+          : "*최소 4자 이상 입력해주세요."}
+      </p>
     </InputBox>
   );
 };
