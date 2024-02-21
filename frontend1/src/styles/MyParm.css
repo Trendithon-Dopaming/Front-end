@@ -1,0 +1,112 @@
+.save-parm {
+    margin-left: 240px;
+}
+
+.save-parm h1 {
+    color: #FFFBFB;
+    font-family: "Pretendard Variable";
+    font-size: 53px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin-bottom: 40px;
+}
+
+#card-arrow2 {
+    margin-right: 20px;
+}
+
+.cards-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    /* 컨테이너를 3개의 열로 나눔 */
+    grid-gap: 20px;
+    /* 카드 사이의 간격 */
+    padding: 20px;
+    margin-bottom: 20px;
+    /* Footer와의 간격 */
+    width: 300px;
+    margin-left: 200px;
+}
+
+.card {
+    border-radius: 7.628px;
+    border: 1px solid white;
+    margin-bottom: 30px;
+}
+
+.card-image {
+    border-radius: 25px;
+    width: 281.322px;
+    height: 206.945px;
+    flex-shrink: 0;
+    padding: 20px 20px;
+}
+
+.card-info {
+    padding: 16px;
+}
+
+.card-title {
+    color: #FFF;
+    text-align: left;
+    font-family: "Pretendard Variable";
+    font-size: 23.839px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 0.238px;
+    width: 260px;
+}
+
+.card-title-container {
+    display: flex;
+    margin-top: -40px;
+    margin-top: -20px;
+}
+
+.card-date {
+    color: #808080;
+    text-align: left;
+    font-family: "Pretendard Variable";
+    font-size: 19.071px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 0.191px;
+}
+
+.card-arrow {
+    margin-left: 10px;
+}
+
+.card-date-and-icon {
+    display: flex;
+    /* 이 부분이 가로로 나열하기 위한 핵심입니다 */
+    align-items: center;
+    /* 세로축에서 아이템들을 가운데 정렬합니다 */
+}
+
+.card-date {
+    margin-right: 55px;
+}
+
+.pagenumber {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    /* 플렉스 아이템들을 수평 방향 중앙에 배치 */
+    align-items: center;
+    display: flex;
+    color: #FFF;
+    font-family: "Pretendard Variable";
+    font-size: 22.534px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 10.516px;
+    gap: 10px;
+}
+
+#num1 {
+    font-weight: bold;
+}
