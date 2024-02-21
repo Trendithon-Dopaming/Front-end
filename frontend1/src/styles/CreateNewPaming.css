@@ -1,0 +1,577 @@
+body {
+    background-color: black;
+    color: #FFFBFB;
+    /* 기본 텍스트 색상을 흰색으로 설정할 수도 있습니다. */
+}
+input::placeholder {
+    color: white; /* placeholder 텍스트의 색상을 흰색으로 설정 */
+    opacity: 1; /* Internet Explorer에서 placeholder 색상을 변경할 때 필요할 수 있음 */
+  }
+  
+
+.text-container {
+    display: flex;
+    /* subtitle과 caution을 가로로 배치하기 위해 flex를 사용 */
+    flex-direction: row;
+    /* 가로로 배치 */
+    align-items: center;
+    /* 세로 가운데 정렬 */
+    justify-content: space-between;
+    /* 두 요소 사이에 공간을 최대한 분배 */
+    width: 900px;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #707070;
+}
+
+#titlename {
+    color: #FFFBFB;
+    font-family: "Pretendard Variable";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 65px;
+    line-height: normal;
+    margin-right: 330px;
+}
+
+#subtitle {
+    display: flex;
+    color: #FFF;
+    font-family: Pretendard;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+}
+
+#caution {
+    color: #DF0000;
+    font-family: Pretendard;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    margin-right: 150px;
+}
+
+.title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.paming-name {
+    display: flex;
+    /* subtitle과 caution을 가로로 배치하기 위해 flex를 사용 */
+    flex-direction: row;
+    /* 가로로 배치 */
+    align-items: center;
+    /* 세로 가운데 정렬 */
+    justify-content: space-between;
+    margin-right: 15px;
+}
+
+#paming-name {
+    color: #FFF;
+    font-family: Pretendard;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+#star {
+    color: #F00;
+    font-family: Pretendard;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+#input {
+    padding: 4px 4px;
+    color: #FFF;
+    font-family: Pretendard;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    width: 644px;
+    margin-left: 65px;
+    background: none;
+    border: none;
+    border-bottom: 1px solid #fff;
+    outline: none;
+}
+
+#input::placeholder {
+    color: #FFF;
+}
+
+#note {
+    position: absolute;
+    color: #626262;
+    font-family: Pretendard;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    margin-top: 90px;
+    left: 480px;
+}
+
+.description {
+    display: flex;
+    /* subtitle과 caution을 가로로 배치하기 위해 flex를 사용 */
+    flex-direction: row;
+    /* 가로로 배치 */
+    align-items: center;
+    /* 세로 가운데 정렬 */
+    justify-content: space-between;
+    margin-right: 220px;
+}
+
+#description {
+    color: #FFF;
+    font-family: Pretendard;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin-left: 205px;
+    margin-right: 95px;
+}
+
+#description::after {
+    content: '';
+    /* 가상 요소에 내용 없음 설정 */
+    bottom: 18px;
+    /* 밑줄과의 거리 조정 */
+    width: 90%;
+    /* 가로 폭 100% 설정 */
+    height: 1px;
+    /* 밑줄 높이 지정 */
+    background-color: #FFF;
+    /* 밑줄 색상 지정 */
+    left: 250px;
+}
+
+.paming-stage {
+    display: flex;
+    /* subtitle과 caution을 가로로 배치하기 위해 flex를 사용 */
+    flex-direction: row;
+    /* 가로로 배치 */
+    align-items: center;
+    /* 세로 가운데 정렬 */
+    justify-content: space-between;
+    margin-right: 240px;
+}
+
+#paming-stage {
+    color: #FFF;
+    font-family: Pretendard;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin-left: 225px;
+}
+
+#input2 {
+    padding: 4px 4px;
+    color: #FFF;
+    font-family: Pretendard;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    width: 644px;
+    margin-left: 92px;
+    background: none;
+    border: none;
+    border-bottom: 1px solid #fff;
+    outline: none;
+}
+
+#input2::placeholder {
+    color: #FFF;
+}
+
+#plusbtn {
+    position: absolute;
+    top: 740px;
+    left: 480px;
+    font-size: 35px;
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    border: none;
+    /* 버튼 스타일 초기화 */
+    background-color: transparent;
+    /* 배경색 투명으로 설정 */
+    color: #FFF;
+    /* "+" 기호 색상 지정 */
+    cursor: pointer;
+    /* 커서를 포인터로 변경하여 클릭 가능함을 나타냄 */
+    outline: none;
+    /* 포커스 시 테두리 제거 */
+}
+
+#plusnote {
+    position: absolute;
+    color: #626262;
+    font-family: Pretendard;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    margin-top: 90px;
+    left: 520px;
+}
+
+.list-item {
+    display: flex;
+    /* 플렉스 박스 사용 */
+    justify-content: space-between;
+    /* 수평 정렬 및 간격 자동 조절 */
+    align-items: center;
+    /* 수직 가운데 정렬 */
+    padding: 8px 16px;
+    /* 안쪽 여백 설정 */
+    border: 1px solid #ccc;
+    /* 테두리 설정 */
+    border-radius: 4px;
+    /* 모서리 둥글게 만들기 */
+    margin-bottom: 8px;
+    /* 아래쪽 마진 설정 */
+}
+
+.delete-button {
+    background-color: transparent;
+    /* 배경색 투명으로 설정 */
+    border: none;
+    /* 테두리 제거 */
+    cursor: pointer;
+    /* 포인터 커서 설정 */
+    color: #FFF;
+    /* 텍스트 색상 지정 */
+    padding: 4px;
+}
+
+.img {
+    margin-top: 10px;
+}
+
+#img {
+    position: absolute;
+    ;
+    color: #FFF;
+    font-family: Pretendard;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    left: 272px;
+    top: 790px;
+}
+
+#imgnote {
+    color: #626262;
+    font-family: Pretendard;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+#viewbox {
+    margin-right: 410px;
+}
+
+.image-preview img {
+    border-radius: 25px;
+    /* 테두리의 모서리를 둥글게 처리 */
+    margin-right: 150px;
+}
+
+.paming-period {
+    display: flex;
+    /* subtitle과 caution을 가로로 배치하기 위해 flex를 사용 */
+    align-items: center;
+    /* 세로 가운데 정렬 */
+    justify-content: space-between;
+    margin-top: 20px;
+
+}
+
+.paming-label {
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    left: 275px;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+}
+
+#paming-period {
+    color: #FFF;
+    font-family: Pretendard;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+#input-start {
+    padding: 4px 4px;
+    color: #FFF;
+    font-family: Pretendard;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    width: 380px;
+    margin-left: 65px;
+    background: none;
+    border: none;
+    border-bottom: 1px solid #fff;
+    outline: none;
+    margin-right: 120px;
+}
+
+#input-end {
+    padding: 4px 4px;
+    color: #FFF;
+    font-family: Pretendard;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    width: 380px;
+    margin-left: 65px;
+    background: none;
+    border: none;
+    border-bottom: 1px solid #fff;
+    outline: none;
+}
+
+.category {
+    display: flex;
+    /* subtitle과 caution을 가로로 배치하기 위해 flex를 사용 */
+    flex-direction: row;
+    /* 가로로 배치 */
+    align-items: center;
+    /* 세로 가운데 정렬 */
+    justify-content: space-between;
+    margin-right: 75px;
+    margin-left: -60px;
+    margin-top: 50px;
+}
+
+#category {
+    color: #FFF;
+    font-family: Pretendard;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+#leisure-activity {
+    cursor: pointer;
+    font-family: Pretendard;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    color: #FFF;
+    padding: 11px 47px;
+    border-radius: 20px;
+    border: 1px solid #A3A3A3;
+    background: rgba(255, 255, 255, 0.00);
+    margin-right: 10px;
+    margin-left: 100px;
+}
+
+#tourism {
+    cursor: pointer;
+    font-family: Pretendard;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    color: #FFF;
+    padding: 11px 47px;
+    border-radius: 20px;
+    border: 1px solid #A3A3A3;
+    background: rgba(255, 255, 255, 0.00);
+    margin-right: 10px;
+}
+
+#etc {
+    cursor: pointer;
+    font-family: Pretendard;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    color: #FFF;
+    padding: 11px 47px;
+    border-radius: 20px;
+    border: 1px solid #A3A3A3;
+    background: rgba(255, 255, 255, 0.00);
+    margin-right: 10px;
+}
+
+#leisure-activity.active,
+#tourism.active,
+#etc.active {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+.area {
+    display: flex;
+    /* subtitle과 caution을 가로로 배치하기 위해 flex를 사용 */
+    flex-direction: row;
+    /* 가로로 배치 */
+    align-items: center;
+    /* 세로 가운데 정렬 */
+    justify-content: space-between;
+    margin-right: 200px;
+    margin-left: -160px;
+    margin-top: 20px;
+}
+
+#area {
+    color: #FFF;
+    font-family: Pretendard;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+#domestic {
+    cursor: pointer;
+    font-family: Pretendard;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    color: #FFF;
+    padding: 11px 47px;
+    border-radius: 20px;
+    border: 1px solid #A3A3A3;
+    background: rgba(255, 255, 255, 0.00);
+    margin-right: 10px;
+    margin-left: 150px;
+}
+
+#foreign {
+    cursor: pointer;
+    font-family: Pretendard;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    color: #FFF;
+    padding: 11px 47px;
+    border-radius: 20px;
+    border: 1px solid #A3A3A3;
+    background: rgba(255, 255, 255, 0.00);
+    margin-right: 10px;
+}
+
+#domestic.active {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+#foreign.active {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+.disclosureStatus {
+    display: flex;
+    /* subtitle과 caution을 가로로 배치하기 위해 flex를 사용 */
+    flex-direction: row;
+    /* 가로로 배치 */
+    align-items: center;
+    /* 세로 가운데 정렬 */
+    justify-content: space-between;
+    margin-right: 75px;
+    margin-left: -180px;
+    margin-top: 20px;
+    margin-right: 155px;
+}
+
+#disclosureStatus {
+    color: #FFF;
+    font-family: Pretendard;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+#public {
+    cursor: pointer;
+    font-family: Pretendard;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    color: #FFF;
+    padding: 11px 47px;
+    border-radius: 20px;
+    border: 1px solid #A3A3A3;
+    background: rgba(255, 255, 255, 0.00);
+    margin-right: 10px;
+    margin-left: 92px;
+}
+
+#private {
+    cursor: pointer;
+    font-family: Pretendard;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    color: #FFF;
+    padding: 11px 47px;
+    border-radius: 20px;
+    border: 1px solid #A3A3A3;
+    background: rgba(255, 255, 255, 0.00);
+    margin-right: 10px;
+}
+
+#public.active {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+#private.active {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+#registration {
+    width: 478px;
+    height: 111px;
+    flex-shrink: 0;
+    cursor: pointer;
+    color: #FFF;
+    font-family: "Pretendard Variable";
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+    padding: 11px 47px;
+    border-radius: 20px;
+    border: 1px solid #A3A3A3;
+    background: rgba(255, 255, 255, 0.00);
+    margin-top: 280px;
+}
+
+#registration.active {
+    background-color: #ffffff;
+    color: #000000;
+}
