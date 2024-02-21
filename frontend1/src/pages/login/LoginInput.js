@@ -38,7 +38,7 @@ const InputBox = styled.div`
     margin-right: 100px;
   }
   .emailGuide {
-    color: ${({ emailError }) => (emailError ? "#fff" : "#000")};
+    color: ${({ emailError }) => (emailError ? "red" : "#000")};
     font-size: 12px;
     font-style: normal;
     font-weight: 400;
