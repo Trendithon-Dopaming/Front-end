@@ -61,6 +61,7 @@ const ModalContent = styled.div`
     bottom: 15px;
     left: 80%;
     transform: translateX(-50%);
+    width: 111.568px;
     height: 40.216px;
     border-radius: 7.135px;
     background: #0a0101;
