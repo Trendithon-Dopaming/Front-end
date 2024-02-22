@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import MGraph from "../components/mainpageGraph";
 
 const MainSection = styled.div`
   .mainPart {
@@ -93,6 +94,18 @@ const MainSection = styled.div`
       background: #000;
       margin-bottom: 240px;
     }
+    .farmImg {
+      display: flex;
+      justify-content: center;
+      gap: 50px;
+      margin: 100px 0 185px;
+    }
+    .graphImg > img {
+      width: 310px;
+      height: 310px;
+      border-radius: 44px;
+      margin-top: 45px;
+    }
   }
 `;
 
@@ -168,7 +181,15 @@ const Mainpage = () => {
             도파밍에서는 시작부터 끝까지 경험이 이루어지는 과정을
             <br /> 직접 설계하고 볼 수 있습니다.
           </div>
-          <div className="farmImg">파밍 그래프 첨부 예정</div>
+          <div className="farmImg">
+            <div className="graphImg">
+              <img
+                src="https://s3-alpha-sig.figma.com/img/6dea/3963/73cff3f6c49eab942069770c7fa03d67?Expires=1709510400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=nckR~O~VrdeAB5cX3depPWVnRODTA2NXq50lqF~6LkwaJ8g~on0kqM3TqmrVhjN23kFM~-tem1vQF7UlxDzDyAf2OmjfGUuZVYAQvalaMMdkq9a3DMSoFaWA1Egg3WlevEMBNJzfgsKqVNXWmbrRwgkxvMCN1o6pU~78b9ljadrQSfQ8g2WToC5N6eyHiBWR-rFk2GxK0Z5~PB4OvN48k5j2E59TP8R3-9Y1O2EhWj0-HZo-Mn9eUSzMu7urihhWPjje46ISRBf3AdksqmTN3n2zDO9nZGKuX~D2IbA47SPJbMbBqUWLomCl377lBeijERV5Fq~lyJvFXg~vfo8p1g__"
+                alt="graphImg"
+              />
+            </div>
+            <MGraph />
+          </div>
           <div className="dirBtn">나의 팜 바로가기</div>
         </div>
       </div>
