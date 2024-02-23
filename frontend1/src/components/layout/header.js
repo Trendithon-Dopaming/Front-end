@@ -20,10 +20,14 @@ function Header() {
         <nav className="header-nav">
           <ul>
             <li>
-              <a href="/experience">경험 파밍</a>
+              <StyledLink to="/experience" className="menu">
+                경험 파밍
+              </StyledLink>
             </li>
             <li>
-              <a href="/MyParm">나의 파밍</a>
+              <StyledLink to="/mypaming" className="menu">
+                나의 파밍
+              </StyledLink>
             </li>
           </ul>
         </nav>
