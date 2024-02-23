@@ -1,11 +1,12 @@
 import styled from "styled-components";
-import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import MGraph from "../components/mainpageGraph";
 
 const MainSection = styled.div`
+  overflow: hidden;
   .mainPart {
     text-align: center;
     background-color: black;
@@ -15,6 +16,7 @@ const MainSection = styled.div`
       display: inline-flex;
       flex-direction: column;
       align-items: center;
+      margin-top: 196px;
       margin-bottom: 422.13px;
       .hook1 {
         text-align: center;
@@ -109,6 +111,11 @@ const MainSection = styled.div`
   }
 `;
 
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: inherit;
+`;
+
 const Mainpage = () => {
   const settings = {
     dots: false,
@@ -169,8 +176,9 @@ const Mainpage = () => {
               />
             </Slider>
           </div>
-
-          <div className="dirBtn">경험 파밍 바로가기</div>
+          <StyledLink to="/experience" className="dirBtn">
+            경험 파밍 바로가기
+          </StyledLink>
         </div>
         <div className="part3">
           <div className="title1">
@@ -190,7 +198,9 @@ const Mainpage = () => {
             </div>
             <MGraph />
           </div>
-          <div className="dirBtn">나의 팜 바로가기</div>
+          <StyledLink to="/experience" className="dirBtn">
+            나의 팜 바로가기
+          </StyledLink>
         </div>
       </div>
     </MainSection>
