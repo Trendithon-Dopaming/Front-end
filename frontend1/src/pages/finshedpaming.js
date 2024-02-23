@@ -4,8 +4,10 @@ import Graph from "../components/currentgraph";
 import eximg1 from "../assets/ad_Ex2.jpg";
 import ListBox from "../components/listbox";
 import { Link } from "react-router-dom";
-import React, { useState } from "react";
-
+import Header from "../components/header";
+import Footer from "../components/footer";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 // 카테고리 선택 박스
 const SelectBox = (props) => {
     return (
@@ -70,19 +72,22 @@ function Current(props) {
                 }}
             >
                 {/* 파밍 현황 표시 */}
-                <Finshedbox stepname={props.name}></Finshedbox>
+                <Finshedbox
+                    stepname={props.name}
+                    type={props.type}
+                ></Finshedbox>
 
                 <Finshedbox
-                    stepname={`완수한 파밍 ${finishedNum}개`}
+                    stepname={`완수한 파밍 ${props.cleared_step}개`}
+                    type={props.type}
                 ></Finshedbox>
                 <Finshedbox
-                    stepname={`남은 파밍 ${
-                        props.currentinfo.length - finishedNum
-                    } 개`}
+                    stepname={`남은 파밍 ${props.unclear_step} 개`}
+                    type={props.type}
                 ></Finshedbox>
 
                 {/* 완료 여부에 따라 버튼 표시 */}
-                {finishedNum === props.currentinfo.length ? (
+                {props.cleared_step === props.currentinfo.length ? (
                     <>
                         {/* 수정된 부분: 재도전하기 버튼 */}
                         <button style={buttonStyle}>파밍 성공</button>
@@ -219,16 +224,121 @@ function Paminglog(props) {
                 }}
             >
                 <ListBox
-                    name="패러글라이딩"
-                    date="2023.01.02~2023.12.24"
+                    name={props.name}
+                    date={props.date}
                     style={{
                         width: "314px",
                         height: "312px",
                         borderRadius: "44px",
                     }}
                 ></ListBox>
-                <Graph stepinfo={props.stepinfo} option="1"></Graph>
+
+                <Graph
+                    stepinfo={props.stepinfo}
+                    option={props.category}
+                ></Graph>
             </div>
+        </div>
+    );
+}
+function ShowPaming() {
+    //파밍 정보
+    // 파밍 정보 가져오는 함수
+    async function fetchData() {
+        try {
+            const response = await axios
+                .get("http://localhost:8080/pamings/expired/v2")
+                .then((response) => {
+                    console.log(response.data.pamings);
+                });
+            // 응답 확인용
+            // 데이터 처리
+        } catch (error) {
+            console.error("Error fetching data:", error);
+        }
+    }
+
+    const paminglists = [
+        {
+            paming_id: 2,
+            paming_title: "페러글라이딩",
+            category: "TOURISM",
+            photo_url: "사진2.com",
+            start_date: "2023.05.06",
+            end_date: "2023.07.06",
+            remaining_period: -3,
+            cleared_step: 3,
+            unclear_step: 0,
+            steps: [
+                {
+                    step: 1,
+                    content: "7만원 모으기",
+                    success: true,
+                },
+                {
+                    step: 2,
+                    content: "예약하기",
+                    success: true,
+                },
+                {
+                    step: 3,
+                    content: "경험하기",
+                    success: true,
+                },
+            ],
+        },
+        {
+            paming_id: 1,
+            paming_title: "번지점프",
+            category: "OTHER",
+            photo_url: "사진1.com",
+            start_date: "2024.02.01",
+            end_date: "2024.02.18",
+            remaining_period: -4,
+            cleared_step: 1,
+            unclear_step: 2,
+            steps: [
+                {
+                    step: 1,
+                    content: "100,000원 모으기",
+                    success: true,
+                },
+                {
+                    step: 2,
+                    content: "예약하기",
+                    success: false,
+                },
+                {
+                    step: 3,
+                    content: "경험하기",
+                    success: false,
+                },
+            ],
+        },
+    ];
+
+    return (
+        <div>
+            {paminglists.map((paming, index) => (
+                <div key={index}>
+                    <div>
+                        <Current
+                            currentinfo={paming.steps}
+                            name={paming.paming_title}
+                            type={paming.category}
+                            cleared_step={paming.cleared_step}
+                            unclear_step={paming.unclear_step}
+                        />
+                    </div>
+                    <div>
+                        <Paminglog
+                            stepinfo={paming.steps}
+                            name={paming.paming_title}
+                            date={paming.start_date + " ~ " + paming.end_date}
+                        />
+                    </div>
+                </div>
+            ))}
         </div>
     );
 }
@@ -245,17 +355,6 @@ function Finshed() {
         { value: 2.1, name: "국내" },
         { value: 2.2, name: "해외" },
     ];
-    const steplist = [
-        { info: "50,000원 모으기", option: "1" },
-        { info: "30,000원 모으기", option: "1" },
-        { info: "60,000원 모으기", option: "1" },
-        { info: "70,000원 모으기", option: "0" },
-    ];
-    //파밍 정보
-    const listpaming = [
-        { currentinfo: steplist, name: "패러글라이딩" },
-        { currentinfo: steplist, name: "패러글라이딩" },
-    ];
 
     return (
         <div
@@ -263,97 +362,83 @@ function Finshed() {
                 backgroundColor: "black",
                 display: "flex",
                 justifyContent: "center",
+                flexDirection: "column",
             }}
         >
+            <Header></Header>
             <div
                 className="main"
                 style={{
                     display: "flex",
                     justifyContent: "center",
                     flexDirection: "column",
-                    margin: "10px",
+                    margin: "20px",
+                    alignContent: "center",
                 }}
             >
-                <div
-                    style={{
-                        display: "flex",
-                        flexDirection: "row",
-                    }}
-                >
-                    <Link
-                        to="/mainpage"
-                        style={{
-                            textDecoration: "none",
-                            cursor: "pointer",
-                            background: "none",
-                            fontSize: "55px",
-
-                            color: "white",
-
-                            fontSize: "70px",
-                        }}
-                    >
-                        지난 파밍로그
-                    </Link>
-                </div>
-
-                <div>
-                    <div
-                        className="optionboxs"
-                        style={{ display: "flex", margin: "30px" }}
-                    >
-                        <div style={{ display: "flex", margin: "10px" }}>
-                            <div style={{ margin: "10px" }}>
-                                <SelectBox
-                                    option={optionField}
-                                    category="분야"
-                                ></SelectBox>
-                            </div>
-                            <div style={{ margin: "10px" }}>
-                                <SelectBox
-                                    option={optionCountry}
-                                    category="지역"
-                                ></SelectBox>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div>
-                    <div>
-                        <Current
-                            currentinfo={listpaming[0].currentinfo}
-                            name={listpaming[0].name}
-                        ></Current>
-                    </div>
-                    <div>
-                        <Paminglog
-                            stepinfo={listpaming[0].currentinfo}
-                        ></Paminglog>
-                    </div>
-                    <div>
-                        <Current
-                            currentinfo={listpaming[0].currentinfo}
-                            name={listpaming[1].name}
-                        ></Current>
-                    </div>
-                    <div>
-                        <Paminglog
-                            stepinfo={listpaming[0].currentinfo}
-                        ></Paminglog>
-                    </div>
-                </div>
-                <div>
+                <div style={{ margin: "50px" }}>
                     <div
                         style={{
                             display: "flex",
-                            justifyContent: "center",
-                            flexDirection: "column",
-                            margin: "20px",
+                            flexDirection: "row",
                         }}
-                    ></div>
+                    >
+                        <Link
+                            to="/mainpage"
+                            style={{
+                                textDecoration: "none",
+                                cursor: "pointer",
+                                background: "none",
+                                fontSize: "55px",
+
+                                color: "white",
+
+                                fontSize: "55px",
+                                margin: "50px",
+                            }}
+                        >
+                            지난 파밍로그
+                        </Link>
+                    </div>
+
+                    <div>
+                        <div
+                            className="optionboxs"
+                            style={{ display: "flex", margin: "30px" }}
+                        >
+                            <div style={{ display: "flex", margin: "10px" }}>
+                                <div style={{ margin: "10px" }}>
+                                    <SelectBox
+                                        option={optionField}
+                                        category="분야"
+                                    ></SelectBox>
+                                </div>
+                                <div style={{ margin: "10px" }}>
+                                    <SelectBox
+                                        option={optionCountry}
+                                        category="지역"
+                                    ></SelectBox>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <ShowPaming></ShowPaming>
+                    </div>
+                    <div>
+                        <div
+                            style={{
+                                display: "flex",
+                                justifyContent: "center",
+                                flexDirection: "column",
+                                margin: "20px",
+                            }}
+                        ></div>
+                    </div>
                 </div>
             </div>
+            <Footer></Footer>
         </div>
     );
 }

@@ -3,6 +3,10 @@ import CurrentBox from "../components/currentbox";
 import Graph from "../components/currentgraph";
 import eximg1 from "../assets/ad_Ex2.jpg";
 import iconmove2 from "../assets/chevron-right (2).png";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import Header from "../components/header";
+import Footer from "../components/footer";
 //유사 파밍 박스 -> 파밍 목록에서 박스 가져오기
 function Recommend() {
     const recommendlist = [
@@ -166,8 +170,8 @@ function Info(props) {
                                 index < 5 && (
                                     <CurrentBox
                                         key={index}
-                                        stepname={step.info}
-                                        option={step.option}
+                                        stepname={step.content}
+                                        option={step.success}
                                         type={props.type} /*레저등등 옵션 */
                                     ></CurrentBox>
                                 )
@@ -182,31 +186,51 @@ function Info(props) {
 //이미지랑 현재 단계
 
 function ExperiencePersonal() {
-    const steplist = [
-        { info: "50,000원 모으기", option: "1" },
-        { info: "30,000원 모으기", option: "1" },
-        { info: "30,000원 모으기", option: "1" },
-        { info: "30,000원 모으기", option: "1" },
-        { info: "30,000원 모으기", option: "0" },
-    ];
-    const currentsteplist = [
-        { info: "50,000원 모으기", option: "1" },
-        { info: "30,000원 모으기", option: "1" },
-        { info: "60,000원 모으기", option: "1" },
-        { info: "70,000원 모으기", option: "1" },
-        { info: "80,000원 모으기", option: "1" },
-    ];
+    const [ongoingPamings, setOngoingPamings] = useState([]);
+
+    useEffect(() => {
+        const fetchOngoingPamings = async () => {
+            try {
+                const response = await axios.get(
+                    "http://localhost:8080/pamings/${paming - id}"
+                );
+                setOngoingPamings(response.data.pamings);
+            } catch (error) {
+                console.error("Error fetching ongoing pamings:", error);
+            }
+        };
+
+        fetchOngoingPamings();
+    }, []);
+
     const infopersonal = [
         {
             name: "김지은",
             date: "2023.01.02 ~ 2023.12.14",
             detail: "두바이에서 진경을 바라보며 열기구를 타보고 싶었던 꿈, 한 번 이뤄보자!",
             option: "1",
-            type: "2" /*레저 관광 기타 */,
+            type: "LEISURE" /*레저 관광 기타 */,
+            //파밍현황
+            currentsteplist: [
+                { step: 1, content: "100,000원 모으기", success: true },
+                { step: 2, content: "예약하기", success: false },
+                { step: 4, content: "경험하기", success: false },
+                { step: 5, content: "경험하기", success: false },
+                { step: 6, content: "경험하기", success: false },
+            ],
+            //파밍 단계
+            steplist: [
+                { info: "50,000원 모으기", option: "1" },
+                { info: "30,000원 모으기", option: "1" },
+                { info: "30,000원 모으기", option: "1" },
+                { info: "30,000원 모으기", option: "1" },
+                { info: "30,000원 모으기", option: "0" },
+            ],
         },
     ];
     return (
         <div style={{ backgroundColor: "black" }}>
+            <Header></Header>
             <div
                 className="main"
                 style={{
@@ -233,7 +257,11 @@ function ExperiencePersonal() {
                             marginRight: "50px",
                         }}
                     ></img>
-                    <Graph stepinfo={steplist} option="3"></Graph>
+
+                    <Graph
+                        stepinfo={infopersonal[0].currentsteplist}
+                        option={infopersonal[0].type}
+                    ></Graph>
                 </div>
                 <div
                     style={{
@@ -269,8 +297,8 @@ function ExperiencePersonal() {
                                 detail={infopersonal[0].detail}
                                 option={infopersonal[0].option}
                                 type={infopersonal[0].type} /*레저 관광 기타 */
-                                stepinfo={steplist}
-                                currentinfo={currentsteplist}
+                                stepinfo={infopersonal[0].steplist}
+                                currentinfo={infopersonal[0].currentsteplist}
                             ></Info>
                         </div>
 
@@ -310,6 +338,7 @@ function ExperiencePersonal() {
                     </div>
                 </div>
             </div>
+            <Footer></Footer>
         </div>
     );
 }

@@ -26,7 +26,7 @@ function Graph(props) {
     }
     const steplists = [];
     for (let i = 0; i < props.stepinfo.length; i++) {
-        steplists.push(props.stepinfo[i].info);
+        steplists.push(props.stepinfo[i].content);
     }
 
     const stepnum = props.stepinfo.length;
@@ -113,24 +113,12 @@ function Graph(props) {
     const closePopup = () => {
         setPopupOpen(false);
     };
-    {
-        /* 
-    // 완료 버튼 클릭 시 해당 버튼의 색상을 핑크로 변경하는 함수
-    const completeButtonClick = () => {
-        // 현재 클릭한 버튼의 색상을 핑크로 변경합니다.
-        const updatedButtonStatus = [...buttonStatus];
-        updatedButtonStatus[currentButtonIndex] = true;
-        setButtonStatus(updatedButtonStatus);
 
-        // 팝업을 닫습니다.
-        closePopup();
-    };*/
-    }
     const completeButtonClick = () => {
         // 현재 클릭한 버튼의 옵션 값을 변경합니다.
         const updatedSteplist = [...steplist];
-        updatedSteplist[currentButtonIndex].option =
-            updatedSteplist[currentButtonIndex].option === "1" ? "0" : "1";
+        updatedSteplist[currentButtonIndex].success =
+            updatedSteplist[currentButtonIndex].success === true ? false : true;
         setSteplist(updatedSteplist);
 
         // 팝업을 닫습니다.
@@ -150,26 +138,28 @@ function Graph(props) {
         setButtonStatus(updatedButtonStatus);
 
         // 옵션 값을 변경합니다. (1 -> 0, 0 -> 1)
-        setOption(option === 1 ? 0 : 1);
+        setOption(option === true ? false : true);
     };
     // 각 버튼을 담은 JSX 배열 생성
     const buttonElements = buttons.map((button, index) => {
         let outerButtonColor = "";
         let innerButtonColor = "";
         switch (props.option) {
-            case "1": //레저 액티비티
+            case "LEISURE": //레저 액티비티
                 outerButtonColor = "#CAA5B6"; // 바깥쪽 색상
                 innerButtonColor = "#673C4F"; // 안쪽 색상
                 break;
-            case "2": //관광
+            case "TOURISM": //관광
                 outerButtonColor = "#BAB8CC"; // 바깥쪽 색상
                 innerButtonColor = "#726E97"; // 안쪽 색상
                 break;
-            case "3": //기타
+            case "OTHER": //기타
                 outerButtonColor = "#B0C4D4"; // 바깥쪽 색상
                 innerButtonColor = "#7698B3"; // 안쪽 색상
                 break;
             default:
+                outerButtonColor = "#CAA5B6"; // 바깥쪽 색상
+                innerButtonColor = "#673C4F"; // 안쪽 색상
                 break;
         }
 
@@ -184,7 +174,7 @@ function Graph(props) {
                     height: "24px", // 원 크기
                     borderRadius: "50%",
                     backgroundColor:
-                        steplist[index].option === "1"
+                        steplist[index].success === true
                             ? outerButtonColor
                             : `rgba(255, 255, 255, 0.45)`, // 옵션 값에 따라 색상 변경
                     cursor: "pointer",
@@ -202,7 +192,7 @@ function Graph(props) {
                         height: "12px", // 안쪽 원 크기
                         borderRadius: "50%",
                         backgroundColor:
-                            steplist[index].option === "1"
+                            steplist[index].success === true
                                 ? innerButtonColor
                                 : "#FFFFFF", // 안쪽 원 색상
                     }}

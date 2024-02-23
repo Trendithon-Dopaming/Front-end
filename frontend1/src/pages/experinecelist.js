@@ -1,10 +1,12 @@
 import { Link } from "react-router-dom";
 import AdImgData from "../styles/AdImgArray";
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import eximg1 from "../assets/ad_Ex2.jpg";
 import eximg2 from "../assets/ad_Ex1.jpg";
 import ListBox from "../components/listbox";
-
+import Header from "../components/header";
+import Footer from "../components/footer";
 // 이미지 슬라이드
 function Slider() {
     const [slideIndex, setSlideIndex] = useState(0);
@@ -184,40 +186,60 @@ function ExList() {
     ];
 
     // 샘플 데이터
+    const [ongoingPamings, setOngoingPamings] = useState([]);
+
+    useEffect(() => {
+        const fetchOngoingPamings = async () => {
+            try {
+                const response = await axios.get(
+                    "http://localhost:8080/pamings"
+                );
+                setOngoingPamings(response.data.pamings);
+            } catch (error) {
+                console.error("Error fetching ongoing pamings:", error);
+            }
+        };
+
+        fetchOngoingPamings();
+    }, []);
     const listings = [
         { img: eximg1, name: "패러글라이딩", date: "2023.01.02~2023.12.24" },
-        { img: eximg1, name: "비행기", date: "2023.01.02~2023.12.24" },
+        { img: eximg1, name: "유럽 여행", date: "2023.01.02~2023.12.24" },
         { img: eximg1, name: "도쿄타워", date: "2023.01.02~2023.12.24" },
-        { img: eximg1, name: "목록4", date: "날짜4" },
-        { img: eximg1, name: "목록5", date: "날짜5" },
-        { img: eximg1, name: "목록6", date: "날짜6" },
-        { img: eximg1, name: "목록7", date: "날짜7" },
-        { img: eximg1, name: "목록8", date: "날짜8" },
-        { img: eximg1, name: "목록9", date: "날짜9" },
-        { img: eximg1, name: "목록10", date: "날짜10" },
-        { img: eximg1, name: "목록11", date: "날짜11" },
-        { img: eximg1, name: "목록12", date: "날짜12" },
-        { img: eximg1, name: "목록13", date: "날짜13" },
-        { img: eximg1, name: "목록4", date: "날짜4" },
-        { img: eximg1, name: "목록5", date: "날짜5" },
-        { img: eximg1, name: "목록6", date: "날짜6" },
-        { img: eximg1, name: "목록7", date: "날짜7" },
-        { img: eximg1, name: "목록8", date: "날짜8" },
-        { img: eximg1, name: "목록9", date: "날짜9" },
-        { img: eximg1, name: "목록10", date: "날짜10" },
-        { img: eximg1, name: "목록11", date: "날짜11" },
-        { img: eximg1, name: "목록12", date: "날짜12" },
-        { img: eximg1, name: "목록13", date: "날짜13" },
-        { img: eximg1, name: "목록4", date: "날짜4" },
-        { img: eximg1, name: "목록5", date: "날짜5" },
-        { img: eximg1, name: "목록6", date: "날짜6" },
-        { img: eximg1, name: "목록7", date: "날짜7" },
-        { img: eximg1, name: "목록8", date: "날짜8" },
-        { img: eximg1, name: "목록9", date: "날짜9" },
-        { img: eximg1, name: "목록10", date: "날짜10" },
-        { img: eximg1, name: "목록11", date: "날짜11" },
-        { img: eximg1, name: "목록12", date: "날짜12" },
-        { img: eximg1, name: "목록13", date: "날짜13" },
+        { img: eximg1, name: "번지 점프", date: "2023.01.02~2023.12.24" },
+        { img: eximg1, name: "부산 여행", date: "2023.01.02~2023.12.245" },
+        { img: eximg1, name: "한강", date: "2023.01.02~2023.12.24" },
+        { img: eximg1, name: "후쿠오카 여행", date: "2023.01.02~2023.12.247" },
+        { img: eximg1, name: "유럽투어", date: "2023.01.02~2023.12.24" },
+        {
+            img: eximg1,
+            name: "마룬파이브 콘서트",
+            date: "2023.01.02~2023.12.29",
+        },
+        { img: eximg1, name: "파리 올림픽", date: "2023.01.02~2023.12.24" },
+        { img: eximg1, name: "하노이 여행", date: "2023.01.02~2023.12.24" },
+        { img: eximg1, name: "제주도", date: "2023.01.02~2023.12.22" },
+        { img: eximg1, name: "패러글라이딩", date: "2023.01.02~2023.12.24" },
+        { img: eximg1, name: "도쿄타워", date: "2023.01.02~2023.12.24" },
+        { img: eximg1, name: "도쿄돔", date: "2023.01.02~2023.12.24" },
+        { img: eximg1, name: "서핑", date: "2023.01.02~2023.12.24" },
+        { img: eximg1, name: "열기구", date: "2023.01.02~2023.12.24" },
+        { img: eximg1, name: "도쿄 유니버셜", date: "2023.01.02~2023.12.24" },
+        { img: eximg1, name: "라오스 블루라군", date: "2023.01.02~2023.12.24" },
+        { img: eximg1, name: "스키", date: "2023.01.02~2023.12.24" },
+        { img: eximg1, name: "호주에서 서핑", date: "2023.01.02~2023.12.24" },
+        { img: eximg1, name: "패러글라이딩", date: "2023.01.02~2023.12.22" },
+        { img: eximg1, name: "등산", date: "2023.01.02~2023.12.24" },
+        { img: eximg1, name: "에베레스트", date: "2023.01.02~2023.12.24" },
+        { img: eximg1, name: "도쿄타워", date: "2023.01.02~2023.12.24" },
+        { img: eximg1, name: "유럽투어", date: "2023.01.02~2023.12.24" },
+        { img: eximg1, name: "목록7", date: "2023.01.02~2023.12.24" },
+        { img: eximg1, name: "목록8", date: "2023.01.02~2023.12.24" },
+        { img: eximg1, name: "목록9", date: "2023.01.02~2023.12.24" },
+        { img: eximg1, name: "목록10", date: "2023.01.02~2023.12.24" },
+        { img: eximg1, name: "목록11", date: "2023.01.02~2023.12.24" },
+        { img: eximg1, name: "목록12", date: "2023.01.02~2023.12.24" },
+        { img: eximg1, name: "목록13", date: "2023.01.02~2023.12.24" },
         { img: eximg1, name: "목록4", date: "날짜4" },
         { img: eximg1, name: "목록5", date: "날짜5" },
         { img: eximg1, name: "목록6", date: "날짜6" },
@@ -341,7 +363,8 @@ function ExList() {
 
 function Experience() {
     return (
-        <div style={{ backgroundColor: "black" }}>
+        <div style={{ backgroundColor: "black", flexDirection: "column" }}>
+            <Header></Header>
             <main
                 style={{
                     display: "flex",
@@ -360,6 +383,7 @@ function Experience() {
                 </div>
                 <ExList></ExList>
             </main>
+            <Footer></Footer>
         </div>
     );
 }

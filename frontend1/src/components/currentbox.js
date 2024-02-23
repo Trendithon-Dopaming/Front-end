@@ -4,15 +4,15 @@ function CurrentBox(props) {
     let backgroundColorc;
     let backgroundColornotc;
     switch (props.type) {
-        case "1":
+        case "LEISURE":
             backgroundColorc = "#673C4F";
             backgroundColornotc = "#CAA5B6";
             break;
-        case "2":
+        case "TOURISM":
             backgroundColorc = "#726E97";
             backgroundColornotc = "#BAB8CC";
             break;
-        case "3":
+        case "OTHER":
             backgroundColorc = "#7698B3";
             backgroundColornotc = "#B0C4D4";
             break;

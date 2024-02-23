@@ -28,7 +28,7 @@ const ListBox = (props) => {
                         to="./"
                         style={{ textDecoration: "none", borderColor: "white" }}
                     >
-                        <box href={"/"}>
+                        <div href={"/"}>
                             <div className="img">
                                 <img
                                     src={props.img}
@@ -71,7 +71,7 @@ const ListBox = (props) => {
                                     <img src={foldericon}></img>
                                 </div>
                             </div>
-                        </box>
+                        </div>
                     </Link>
                 </div>
             </div>

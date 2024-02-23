@@ -4,24 +4,27 @@ import Graph from "../components/currentgraph";
 import eximg1 from "../assets/ad_Ex2.jpg";
 import ListBox from "../components/listbox";
 import { Link } from "react-router-dom";
-
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import makenewimg from "../assets/square-and-pencil.png";
 import iconmove2 from "../assets/chevron-right (2).png";
+import Header from "../components/header";
+import Footer from "../components/footer";
 function CurrentBox(props) {
     // 옵션에 따라 배경 색상 설정
     // 옵션에 따라 배경 색상 설정
     let backgroundColorc;
     let backgroundColornotc;
     switch (props.type) {
-        case "1":
+        case "LEISURE":
             backgroundColorc = "#673C4F";
             backgroundColornotc = "#CAA5B6";
             break;
-        case "2":
+        case "TOURISM":
             backgroundColorc = "#726E97";
             backgroundColornotc = "#BAB8CC";
             break;
-        case "3":
+        case "OTHER":
             backgroundColorc = "#7698B3";
             backgroundColornotc = "#B0C4D4";
             break;
@@ -93,12 +96,12 @@ function Current(props) {
                         type={props.type}
                     ></CurrentBox>
                     <CurrentBox
-                        stepname={"남은 기간 일"}
+                        stepname={`남은 기간 ${props.dday} 일`}
                         option="0"
                         type={props.type}
                     ></CurrentBox>
                     <CurrentBox
-                        stepname={`완수한 파밍 ${finshednum}개`}
+                        stepname={`완수한 파밍  ${props.cleared_step}개`}
                         option="0"
                         type={props.type}
                     ></CurrentBox>
@@ -207,36 +210,95 @@ function Paminglog(props) {
     );
 }
 
-function Mypaming() {
-    const steplist = [
-        { info: "50,000원 모으기", option: "1" },
-        { info: "30,000원 모으기", option: "0" },
-        { info: "60,000원 모으기", option: "0" },
-        { info: "70,000원 모으기", option: "0" },
-    ];
-    const paminginfo = [
+function ShowCurrent() {
+    const [ongoingPamings, setOngoingPamings] = useState([]);
+
+    useEffect(() => {
+        const fetchOngoingPamings = async () => {
+            try {
+                const response = await axios.get(
+                    "http://localhost:8080/pamings/ongoing"
+                );
+                setOngoingPamings(response.data.pamings);
+            } catch (error) {
+                console.error("Error fetching ongoing pamings:", error);
+            }
+        };
+
+        fetchOngoingPamings();
+    }, []);
+    const paminginfoget = [
         {
-            currentinfo: steplist,
-            name: "패러글라이딩",
-            type: "1",
-            date: "2023.01.02~2023.12.14",
+            paming_id: 1,
+            paming_title: "열기구 체험",
+            category: "LEISURE",
+            photo_url: "photo.com",
+            start_date: "2024.02.23",
+            end_date: "2024.02.27",
+            remaining_period: 4,
+            cleared_step: 1,
+            unclear_step: 2,
+            steps: [
+                { step: 1, content: "100,000원 모으기", success: true },
+                { step: 2, content: "예약하기", success: false },
+                { step: 3, content: "경험하기", success: false },
+            ],
         },
         {
-            currentinfo: steplist,
-            name: "도쿄타워",
-            type: "2",
-            date: "2023.01.02~2023.12.14",
+            paming_id: 2,
+            paming_title: "도쿄타워",
+            category: "TOURISM",
+            photo_url: "photo.com",
+            start_date: "2024.02.23",
+            end_date: "2024.02.27",
+            remaining_period: 4,
+            cleared_step: 3,
+            unclear_step: 1,
+            steps: [
+                { step: 1, content: "200,000원 모으기", success: true },
+                { step: 2, content: "예약하기", success: true },
+                { step: 3, content: "일본가기", success: true },
+                { step: 4, content: "경험하기", success: false },
+            ],
         },
     ];
 
+    return (
+        <div>
+            {paminginfoget.map((paming, index) => (
+                <div key={index}>
+                    <Current
+                        currentinfo={paming.steps}
+                        name={paming.paming_title}
+                        type={paming.category}
+                        dday={paming.remaining_period}
+                        cleared_step={paming.cleared_step}
+                        unclear_step={paming.unclear_step}
+                    />
+                    <Paminglog
+                        stepinfo={paming.steps}
+                        currentinfo={paming.steps}
+                        name={paming.paming_title}
+                        type={paming.category}
+                        date={paming.start_date + " ~ " + paming.end_date}
+                    />
+                </div>
+            ))}
+        </div>
+    );
+}
+
+function Mypaming() {
     return (
         <div
             style={{
                 backgroundColor: "black",
                 display: "flex",
                 justifyContent: "center",
+                flexDirection: "column",
             }}
         >
+            <Header></Header>
             <div
                 className="main"
                 style={{
@@ -246,164 +308,140 @@ function Mypaming() {
                     margin: "10px",
                 }}
             >
-                <div
-                    style={{
-                        display: "flex",
-                        flexDirection: "row",
-                    }}
-                >
-                    <div
-                        style={{
-                            fontSize: "55px",
-                            color: "white",
-                            border: "bold",
-                        }}
-                    >
-                        나의 파밍
-                    </div>
-                    <Link to="/mainpage" style={{ textDecoration: "none" }}>
-                        <button
-                            style={{
-                                cursor: "pointer",
-                                border: "1px solid white",
-                                background: "none",
-                                display: "flex",
-                                flexDirection: "row",
-                                justifyContent: "center",
-                                fontSize: "white",
-                                color: "white",
-                                width: "269px",
-                                height: "62px",
-                                fontSize: "23.63px",
-                                borderRadius: "20px",
-                                marginLeft: "50px",
-                                textAlign: "center",
-                            }}
-                        >
-                            <div
-                                style={{
-                                    display: "flex",
-                                    marginTop: "10px",
-                                }}
-                            >
-                                <div>
-                                    <img src={makenewimg}></img>
-                                </div>
-
-                                <div>새 파밍로그 만들기</div>
-                            </div>
-                        </button>
-                    </Link>
-                </div>
-
-                <div>
-                    <div
-                        style={{
-                            fontSize: "55px",
-                            color: "white",
-                            border: "bold",
-                            marginTop: "60px",
-                        }}
-                    >
-                        진행 중인 파밍로그
-                    </div>
-                    <div>
-                        <Current
-                            currentinfo={paminginfo[0].currentinfo}
-                            name={paminginfo[0].name}
-                            type={paminginfo[0].type}
-                        ></Current>
-                    </div>
-                    <div>
-                        <Paminglog
-                            stepinfo={steplist}
-                            currentinfo={paminginfo[0].currentinfo}
-                            name={paminginfo[0].name}
-                            type={paminginfo[0].type}
-                            date={paminginfo[0].date}
-                        ></Paminglog>
-                    </div>
-                    <div>
-                        <Current
-                            currentinfo={paminginfo[1].currentinfo}
-                            name={paminginfo[1].name}
-                            type={paminginfo[1].type}
-                        ></Current>
-                    </div>
-                    <div>
-                        <Paminglog
-                            stepinfo={steplist}
-                            currentinfo={paminginfo[1].currentinfo}
-                            name={paminginfo[1].name}
-                            type={paminginfo[1].type}
-                            date={paminginfo[1].date}
-                        ></Paminglog>
-                    </div>
-                </div>
-                <div>
+                <div style={{ margin: "50px" }}>
                     <div
                         style={{
                             display: "flex",
-                            justifyContent: "center",
-                            flexDirection: "column",
-                            margin: "20px",
-                            marginTop: "100px",
+                            flexDirection: "row",
                         }}
                     >
-                        <div style={{ margin: "50px" }}>
-                            <div
-                                style={{
-                                    fontSize: "55px",
-                                    color: "white",
-                                    border: "bold",
-                                    marginBottom: "50px",
-                                    display: "flex",
-                                    flexDirection: "row",
-                                }}
-                            >
-                                <div>저장 팜</div>
-                                <div
-                                    style={{
-                                        marginTop: "9px",
-                                        marginLeft: "10px",
-                                    }}
-                                >
-                                    <img src={iconmove2}></img>
-                                </div>
-                            </div>
-
-                            <div>
-                                <Recommend></Recommend>
-                            </div>
+                        <div
+                            style={{
+                                fontSize: "55px",
+                                color: "white",
+                                border: "bold",
+                                margin: "50px",
+                            }}
+                        >
+                            나의 파밍
                         </div>
-                        <div style={{ margin: "50px" }}>
-                            <div
+                        <Link to="/mainpage" style={{ textDecoration: "none" }}>
+                            <button
                                 style={{
-                                    fontSize: "55px",
-                                    color: "white",
-                                    border: "bold",
-                                    marginBottom: "50px",
+                                    cursor: "pointer",
+                                    border: "1px solid white",
+                                    background: "none",
                                     display: "flex",
                                     flexDirection: "row",
+                                    justifyContent: "center",
+                                    fontSize: "white",
+                                    color: "white",
+                                    width: "269px",
+                                    height: "62px",
+                                    fontSize: "23.63px",
+                                    borderRadius: "20px",
+                                    marginLeft: "50px",
+                                    textAlign: "center",
+                                    marginTop: "60px",
                                 }}
                             >
-                                <div>지난 파밍로그</div>
                                 <div
                                     style={{
-                                        marginTop: "9px",
-                                        marginLeft: "10px",
+                                        display: "flex",
+                                        marginTop: "10px",
                                     }}
                                 >
-                                    <img src={iconmove2}></img>
+                                    <div>
+                                        <img src={makenewimg}></img>
+                                    </div>
+
+                                    <div>새 파밍로그 만들기</div>
+                                </div>
+                            </button>
+                        </Link>
+                    </div>
+
+                    <div>
+                        <div
+                            style={{
+                                fontSize: "55px",
+                                color: "white",
+                                border: "bold",
+                                marginTop: "60px",
+                                margin: "50px",
+                            }}
+                        >
+                            진행 중인 파밍로그
+                        </div>
+
+                        <ShowCurrent></ShowCurrent>
+                    </div>
+                    <div>
+                        <div
+                            style={{
+                                display: "flex",
+                                justifyContent: "center",
+                                flexDirection: "column",
+                                margin: "20px",
+                                marginTop: "100px",
+                            }}
+                        >
+                            <div style={{ margin: "50px" }}>
+                                <div
+                                    style={{
+                                        fontSize: "55px",
+                                        color: "white",
+                                        border: "bold",
+                                        marginBottom: "50px",
+                                        display: "flex",
+                                        flexDirection: "row",
+                                    }}
+                                >
+                                    <div>저장 팜</div>
+                                    <div
+                                        style={{
+                                            marginTop: "9px",
+                                            marginLeft: "10px",
+                                        }}
+                                    >
+                                        <img src={iconmove2}></img>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <Recommend></Recommend>
                                 </div>
                             </div>
-                            <div>
-                                <Recommend></Recommend>
+                            <div style={{ margin: "50px" }}>
+                                <div
+                                    style={{
+                                        fontSize: "55px",
+                                        color: "white",
+                                        border: "bold",
+                                        marginBottom: "50px",
+                                        display: "flex",
+                                        flexDirection: "row",
+                                    }}
+                                >
+                                    <div>지난 파밍로그</div>
+                                    <div
+                                        style={{
+                                            marginTop: "9px",
+                                            marginLeft: "10px",
+                                        }}
+                                    >
+                                        <img src={iconmove2}></img>
+                                    </div>
+                                </div>
+                                <div>
+                                    <Recommend></Recommend>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <Footer></Footer>
         </div>
     );
 }
