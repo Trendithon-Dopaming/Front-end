@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { useAuth } from "../../components/AuthContext";
 
 const Btn = styled.button`
   font-family: Pretendard;
@@ -78,6 +79,7 @@ const LoginBtn = ({ email, pw, setEmail, setPw }) => {
   const [isDisabled, setIsDisabled] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState("");
+  const { login } = useAuth();
 
   useEffect(() => {
     if (email !== "" && pw !== "") setIsDisabled(false);
@@ -98,6 +100,7 @@ const LoginBtn = ({ email, pw, setEmail, setPw }) => {
       );
 
       if (response.data === "success") {
+        login();
         setIsModalOpen(true);
         setModalContent("성공적으로 로그인되었습니다.");
       } else {
