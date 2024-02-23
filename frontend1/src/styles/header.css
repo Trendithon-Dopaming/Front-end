@@ -1,6 +1,6 @@
 .logo {
-  color: #FFF;
-  font-family: 'Modak', sans-serif;
+  color: #fff;
+  font-family: "Modak", sans-serif;
   font-size: 45px;
   font-style: normal;
   font-weight: 400;
@@ -15,9 +15,7 @@ header {
   align-items: center;
   padding: 0 20px;
   background-color: #000;
-  /* 예시 배경색, 이미지에 맞게 수정해주세요 */
   color: #fff;
-  /* 텍스트 색상 */
 }
 
 .header-container {
@@ -27,36 +25,29 @@ header {
   align-items: center;
 }
 
-
 .header-nav ul {
   list-style: none;
   display: flex;
   gap: 60px;
-  /* 네비게이션 아이템 간격, 필요에 따라 조정 */
 }
 
 .header-nav ul li a {
-  color: #FFF;
+  color: #fff;
   font-family: Pretendard;
   font-size: 25px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
-
   text-decoration: none;
-  /* 밑줄 제거 */
-
 }
 
-.user-area a {
-  color: #FFF;
+.user-area {
+  color: #fff;
   font-family: Pretendard;
   font-size: 25px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
   margin-right: 240px;
-
   text-decoration: none;
-  /* 밑줄 제거 */
 }

@@ -6,6 +6,7 @@ import "slick-carousel/slick/slick-theme.css";
 import MGraph from "../components/mainpageGraph";
 
 const MainSection = styled.div`
+  overflow: hidden;
   .mainPart {
     text-align: center;
     background-color: black;
@@ -15,6 +16,7 @@ const MainSection = styled.div`
       display: inline-flex;
       flex-direction: column;
       align-items: center;
+      margin-top: 196px;
       margin-bottom: 422.13px;
       .hook1 {
         text-align: center;
